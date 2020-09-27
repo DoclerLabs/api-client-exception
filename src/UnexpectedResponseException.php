@@ -4,35 +4,29 @@ namespace DoclerLabs\ApiClientException;
 
 use Exception;
 use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 class UnexpectedResponseException extends Exception implements ClientExceptionInterface
 {
-    /** @var int */
-    private $statusCode;
+    /** @var ResponseInterface */
+    protected $response;
 
     public function __construct(
-        int $statusCode,
-        string $serializedErrors = '',
-        int $code = 0,
+        string $message,
+        ResponseInterface $response,
         Throwable $previous = null
     ) {
-        $this->statusCode = $statusCode;
-
-        $message = \sprintf('Server replied with a non-200 status code: %s', $this->statusCode);
-        if ($serializedErrors !== '') {
-            $message = \sprintf('%s | %s', $message, $serializedErrors);
-        }
-
         parent::__construct(
             $message,
-            $code,
+            0,
             $previous
         );
+        $this->response = $response;
     }
 
-    public function getStatusCode(): int
+    public function getResponse(): ResponseInterface
     {
-        return $this->statusCode;
+        return $this->response;
     }
 }

@@ -8,6 +8,7 @@ use DoclerLabs\ApiClientException\NotFoundResponseException;
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
 use DoclerLabs\ApiClientException\UnauthorizedResponseException;
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
+use Psr\Http\Message\ResponseInterface;
 
 class ResponseExceptionFactory
 {
@@ -25,12 +26,12 @@ class ResponseExceptionFactory
         ];
     }
 
-    public function create(int $statusCode, string $responseBody): UnexpectedResponseException
+    public function create(string $message, ResponseInterface $response): UnexpectedResponseException
     {
-        if (isset($this->responseExceptions[$statusCode])) {
-            return new $this->responseExceptions[$statusCode]($responseBody);
+        if (isset($this->responseExceptions[$response->getStatusCode()])) {
+            return new $this->responseExceptions[$response->getStatusCode()]($message, $response);
         }
 
-        return new UnexpectedResponseException($statusCode, $responseBody);
+        return new UnexpectedResponseException($message, $response);
     }
 }

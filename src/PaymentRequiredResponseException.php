@@ -2,19 +2,7 @@
 
 namespace DoclerLabs\ApiClientException;
 
-use Psr\Http\Client\ClientExceptionInterface;
-
-class PaymentRequiredResponseException extends UnexpectedResponseException implements ClientExceptionInterface
+class PaymentRequiredResponseException extends UnexpectedResponseException
 {
     const STATUS_CODE = 402;
-
-    public function __construct(string $serializedErrors = '')
-    {
-        parent::__construct(self::STATUS_CODE, $serializedErrors);
-    }
-
-    public function getStatusCode(): int
-    {
-        return self::STATUS_CODE;
-    }
 }
