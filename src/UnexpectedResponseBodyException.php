@@ -2,6 +2,9 @@
 
 namespace DoclerLabs\ApiClientException;
 
-class UnexpectedResponseBodyException extends UnexpectedResponseException
+use Exception;
+use Psr\Http\Client\ClientExceptionInterface;
+
+class UnexpectedResponseBodyException extends Exception implements ClientExceptionInterface
 {
 }
