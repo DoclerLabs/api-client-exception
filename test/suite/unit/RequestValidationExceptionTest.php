@@ -11,9 +11,6 @@ use Throwable;
  */
 class RequestValidationExceptionTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     */
     public function testException(): void
     {
         $exception = new RequestValidationException();

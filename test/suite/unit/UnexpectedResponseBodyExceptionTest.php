@@ -11,9 +11,6 @@ use Throwable;
  */
 class UnexpectedResponseBodyExceptionTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     */
     public function testException(): void
     {
         $exception = new UnexpectedResponseBodyException();

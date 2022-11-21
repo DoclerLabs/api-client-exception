@@ -14,8 +14,7 @@ class UnauthorizedResponseExceptionTest extends TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getStatusCode
-     * @covers ::getMessage
+     * @covers ::getResponse
      */
     public function testException(): void
     {

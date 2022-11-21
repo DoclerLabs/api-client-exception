@@ -14,7 +14,7 @@ class PaymentRequiredResponseExceptionTest extends TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getStatusCode
+     * @covers ::getResponse
      */
     public function testException(): void
     {
