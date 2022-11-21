@@ -14,7 +14,6 @@ class UnexpectedResponseExceptionTest extends TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getStatusCode
      * @covers ::getMessage
      */
     public function testException(): void

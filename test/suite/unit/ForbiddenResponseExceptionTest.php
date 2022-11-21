@@ -14,7 +14,6 @@ class ForbiddenResponseExceptionTest extends TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getStatusCode
      */
     public function testException(): void
     {
