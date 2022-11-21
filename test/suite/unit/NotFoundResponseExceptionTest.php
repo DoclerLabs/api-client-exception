@@ -14,7 +14,6 @@ class NotFoundResponseExceptionTest extends TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getMessage
      */
     public function testException(): void
     {
