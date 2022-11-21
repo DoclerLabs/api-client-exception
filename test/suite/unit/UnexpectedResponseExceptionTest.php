@@ -3,8 +3,8 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
@@ -17,11 +17,13 @@ class UnexpectedResponseExceptionTest extends TestCase
      * @covers ::getStatusCode
      * @covers ::getMessage
      */
-    public function testException()
+    public function testException(): void
     {
         $statusCode = 414;
         $errors     = '{"it": "happens"}';
-        $sut        = new UnexpectedResponseException($errors, new Response($statusCode));
+        $response   = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+        $sut        = new UnexpectedResponseException($errors, $response);
 
         $this->assertInstanceOf(Throwable::class, $sut);
         $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());

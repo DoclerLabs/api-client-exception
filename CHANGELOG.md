@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Php 8 support
 
 ### Changed
- - Minimum php version now is 7.2.5 because of guzzle requirements
+ - Minimum php version now is 7.4
 
 ### Fixed
  - Fix tests

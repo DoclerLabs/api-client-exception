@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 class ResponseExceptionFactory
 {
     /** @var string[] */
-    private $responseExceptions;
+    private array $responseExceptions;
 
     public function __construct()
     {

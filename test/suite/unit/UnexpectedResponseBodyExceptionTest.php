@@ -14,7 +14,7 @@ class UnexpectedResponseBodyExceptionTest extends TestCase
     /**
      * @covers ::__construct
      */
-    public function testException()
+    public function testException(): void
     {
         $exception = new UnexpectedResponseBodyException();
         $this->assertInstanceOf(Throwable::class, $exception);

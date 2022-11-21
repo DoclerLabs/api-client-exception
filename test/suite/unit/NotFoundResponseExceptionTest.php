@@ -3,8 +3,8 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\NotFoundResponseException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
@@ -17,10 +17,12 @@ class NotFoundResponseExceptionTest extends TestCase
      * @covers ::getStatusCode
      * @covers ::getMessage
      */
-    public function testException()
+    public function testException(): void
     {
         $statusCode = 404;
-        $sut        = new NotFoundResponseException('', new Response($statusCode));
+        $response   = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+        $sut        = new NotFoundResponseException('', $response);
 
         $this->assertInstanceOf(Throwable::class, $sut);
         $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());

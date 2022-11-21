@@ -4,5 +4,5 @@ namespace DoclerLabs\ApiClientException;
 
 class ForbiddenResponseException extends UnexpectedResponseException
 {
-    const STATUS_CODE = 403;
+    public const STATUS_CODE = 403;
 }

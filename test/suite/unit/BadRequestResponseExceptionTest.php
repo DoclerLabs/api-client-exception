@@ -3,8 +3,8 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\BadRequestResponseException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
@@ -16,10 +16,12 @@ class BadRequestResponseExceptionTest extends TestCase
      * @covers ::__construct
      * @covers ::getStatusCode
      */
-    public function testException()
+    public function testException(): void
     {
         $statusCode = 400;
-        $sut        = new BadRequestResponseException('', new Response($statusCode));
+        $response   = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+        $sut        = new BadRequestResponseException('', $response);
 
         $this->assertInstanceOf(Throwable::class, $sut);
         $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());

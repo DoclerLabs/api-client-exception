@@ -9,8 +9,7 @@ use Throwable;
 
 class UnexpectedResponseException extends Exception implements ClientExceptionInterface
 {
-    /** @var ResponseInterface */
-    protected $response;
+    protected ResponseInterface $response;
 
     public function __construct(
         string $message,

@@ -3,8 +3,8 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
@@ -16,10 +16,12 @@ class PaymentRequiredResponseExceptionTest extends TestCase
      * @covers ::__construct
      * @covers ::getStatusCode
      */
-    public function testException()
+    public function testException(): void
     {
         $statusCode = 402;
-        $sut        = new PaymentRequiredResponseException('', new Response($statusCode));
+        $response   = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+        $sut        = new PaymentRequiredResponseException('', $response);
 
         self::assertInstanceOf(Throwable::class, $sut);
         self::assertEquals($statusCode, $sut->getResponse()->getStatusCode());

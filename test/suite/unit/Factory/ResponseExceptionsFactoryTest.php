@@ -9,8 +9,8 @@ use DoclerLabs\ApiClientException\NotFoundResponseException;
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
 use DoclerLabs\ApiClientException\UnauthorizedResponseException;
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @coversDefaultClass \DoclerLabs\ApiClientException\Factory\ResponseExceptionFactory
@@ -22,15 +22,21 @@ class ResponseExceptionsFactoryTest extends TestCase
      * @covers ::__construct
      * @covers ::create
      */
-    public function testCreate(int $statusCode, string $body, string $expectedExceptionClass)
+    public function testCreate(int $statusCode, string $body, string $expectedExceptionClass): void
     {
         $sut = new ResponseExceptionFactory();
 
         $this->expectException($expectedExceptionClass);
 
-        throw $sut->create($body, new Response($statusCode));
+        $response = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+
+        throw $sut->create($body, $response);
     }
 
+    /**
+     * @return array<0:int, 1:string, 2:string>
+     */
     public function exceptionsDataProvider(): array
     {
         return [
