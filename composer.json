@@ -1,6 +1,6 @@
 {
     "name": "docler-labs/api-client-exception",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "SDK Generator - API Client Exception",
     "type": "library",
     "license": "MIT",
@@ -15,7 +15,8 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.0 || ^8.0",
+        "php": "^7.2 || ^8.0",
+        "guzzlehttp/psr7": "^2.4",
         "psr/http-client": "^1.0",
         "psr/http-message": "^1.0"
     },
@@ -30,7 +31,6 @@
         }
     },
     "require-dev": {
-        "php-coveralls/php-coveralls": "^2.5",
         "phpunit/phpunit": "^9.5"
     }
 }
