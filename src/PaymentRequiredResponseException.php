@@ -4,5 +4,5 @@ namespace DoclerLabs\ApiClientException;
 
 class PaymentRequiredResponseException extends UnexpectedResponseException
 {
-    const STATUS_CODE = 402;
+    public const STATUS_CODE = 402;
 }

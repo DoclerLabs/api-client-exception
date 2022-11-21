@@ -4,5 +4,5 @@ namespace DoclerLabs\ApiClientException;
 
 class NotFoundResponseException extends UnexpectedResponseException
 {
-    const STATUS_CODE = 404;
+    public const STATUS_CODE = 404;
 }

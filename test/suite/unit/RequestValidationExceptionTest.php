@@ -14,7 +14,7 @@ class RequestValidationExceptionTest extends TestCase
     /**
      * @covers ::__construct
      */
-    public function testException()
+    public function testException(): void
     {
         $exception = new RequestValidationException();
         $this->assertInstanceOf(Throwable::class, $exception);

@@ -4,5 +4,5 @@ namespace DoclerLabs\ApiClientException;
 
 class UnauthorizedResponseException extends UnexpectedResponseException
 {
-    const STATUS_CODE = 401;
+    public const STATUS_CODE = 401;
 }

@@ -4,6 +4,7 @@ namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
@@ -16,16 +17,18 @@ class UnexpectedResponseExceptionTest extends TestCase
      * @covers ::getStatusCode
      * @covers ::getMessage
      */
-    public function testException()
+    public function testException(): void
     {
         $statusCode = 414;
         $errors     = '{"it": "happens"}';
-        $sut        = new UnexpectedResponseException($statusCode, $errors);
+        $response   = $this->createMock(ResponseInterface::class);
+        $response->method('getStatusCode')->willReturn($statusCode);
+        $sut        = new UnexpectedResponseException($errors, $response);
 
         $this->assertInstanceOf(Throwable::class, $sut);
-        $this->assertEquals($statusCode, $sut->getStatusCode());
+        $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());
         $this->assertEquals(
-            \sprintf('Server replied with a non-200 status code: %s | %s', $statusCode, $errors),
+            \sprintf('%s', $errors),
             $sut->getMessage()
         );
     }
