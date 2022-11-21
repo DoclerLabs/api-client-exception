@@ -3,6 +3,7 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -18,9 +19,9 @@ class PaymentRequiredResponseExceptionTest extends TestCase
     public function testException()
     {
         $statusCode = 402;
-        $sut        = new PaymentRequiredResponseException();
+        $sut        = new PaymentRequiredResponseException('', new Response($statusCode));
 
         self::assertInstanceOf(Throwable::class, $sut);
-        self::assertEquals($statusCode, $sut->getStatusCode());
+        self::assertEquals($statusCode, $sut->getResponse()->getStatusCode());
     }
 }

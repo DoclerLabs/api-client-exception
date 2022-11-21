@@ -3,6 +3,7 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\UnauthorizedResponseException;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -19,9 +20,9 @@ class UnauthorizedResponseExceptionTest extends TestCase
     public function testException()
     {
         $statusCode = 401;
-        $sut        = new UnauthorizedResponseException();
+        $sut        = new UnauthorizedResponseException('', new Response($statusCode));
 
         $this->assertInstanceOf(Throwable::class, $sut);
-        $this->assertEquals($statusCode, $sut->getStatusCode());
+        $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());
     }
 }

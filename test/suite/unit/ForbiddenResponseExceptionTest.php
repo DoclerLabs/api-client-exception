@@ -3,6 +3,7 @@
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\ForbiddenResponseException;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -18,9 +19,9 @@ class ForbiddenResponseExceptionTest extends TestCase
     public function testException()
     {
         $statusCode = 403;
-        $sut        = new ForbiddenResponseException();
+        $sut        = new ForbiddenResponseException('', new Response($statusCode));
 
         $this->assertInstanceOf(Throwable::class, $sut);
-        $this->assertEquals($statusCode, $sut->getStatusCode());
+        $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());
     }
 }
