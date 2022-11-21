@@ -2,6 +2,7 @@
 
 This library provides the base exceptions for the generated clients made by [api-client-generator](https://github.com/DoclerLabs/api-client-generator).
 
+[![Latest Stable Version](https://poser.pugx.org/docler-labs/api-client-exception/v/stable)](https://packagist.org/packages/docler-labs/api-client-exception)
 [![License](https://poser.pugx.org/docler-labs/api-client-exception/license)](https://packagist.org/packages/docler-labs/api-client-exception)
 
 ## Development

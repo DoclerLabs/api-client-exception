@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "889dfcb3ed0362caaa76a5d54c7be151",
+    "content-hash": "1eb36cdd3715924cd76dfd4e84ec0115",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -172,6 +172,9 @@
                 "psr",
                 "psr-18"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client/tree/master"
+            },
             "time": "2020-06-29T06:28:15+00:00"
         },
         {
@@ -277,6 +280,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -2062,7 +2068,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0 || ^8.0"
+        "php": "^7.2.5 || ^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
