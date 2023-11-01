@@ -1,29 +1,34 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\BadRequestResponseException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
- * @coversDefaultClass \DoclerLabs\ApiClientException\BadRequestResponseException
+ * @covers \DoclerLabs\ApiClientException\BadRequestResponseException
  */
 class BadRequestResponseExceptionTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     * @covers ::getResponse
-     */
     public function testException(): void
     {
         $statusCode = 400;
-        $response   = $this->createMock(ResponseInterface::class);
-        $response->method('getStatusCode')->willReturn($statusCode);
-        $sut        = new BadRequestResponseException('', $response);
 
-        $this->assertInstanceOf(Throwable::class, $sut);
-        $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());
+        /** @var ResponseInterface|MockObject $response */
+        $response = $this->createMock(ResponseInterface::class);
+        $response
+            ->expects(self::once())
+            ->method('getStatusCode')
+            ->willReturn($statusCode);
+
+        $sut = new BadRequestResponseException('', $response);
+
+        self::assertInstanceOf(Throwable::class, $sut);
+        self::assertEquals($statusCode, $sut->getResponse()->getStatusCode());
     }
 }

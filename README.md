@@ -15,8 +15,6 @@ This library provides the base exceptions for the generated clients made by [api
  
     vendor/bin/phpunit
  
-See test reports in `test-reports` directory.
-
 ## Contributing
  
 Create a branch and open PR.

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
@@ -7,13 +9,12 @@ use PHPUnit\Framework\TestCase;
 use Throwable;
 
 /**
- * @coversDefaultClass \DoclerLabs\ApiClientException\UnexpectedResponseBodyException
+ * @covers \DoclerLabs\ApiClientException\UnexpectedResponseBodyException
  */
 class UnexpectedResponseBodyExceptionTest extends TestCase
 {
     public function testException(): void
     {
-        $exception = new UnexpectedResponseBodyException();
-        $this->assertInstanceOf(Throwable::class, $exception);
+        self::assertInstanceOf(Throwable::class, new UnexpectedResponseBodyException());
     }
 }

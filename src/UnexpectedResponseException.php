@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientException;
 
@@ -11,16 +13,10 @@ class UnexpectedResponseException extends Exception implements ClientExceptionIn
 {
     protected ResponseInterface $response;
 
-    public function __construct(
-        string $message,
-        ResponseInterface $response,
-        Throwable $previous = null
-    ) {
-        parent::__construct(
-            $message,
-            0,
-            $previous
-        );
+    public function __construct(string $message, ResponseInterface $response, Throwable $previous = null)
+    {
+        parent::__construct($message, 0, $previous);
+
         $this->response = $response;
     }
 
