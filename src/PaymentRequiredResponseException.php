@@ -1,8 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientException;
 
+use Fig\Http\Message\StatusCodeInterface;
+
 class PaymentRequiredResponseException extends UnexpectedResponseException
 {
-    public const STATUS_CODE = 402;
+    /** @deprecated */
+    public const STATUS_CODE = StatusCodeInterface::STATUS_PAYMENT_REQUIRED;
 }

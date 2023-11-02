@@ -1,34 +1,36 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientBase\Test\Unit;
 
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
- * @coversDefaultClass \DoclerLabs\ApiClientException\UnexpectedResponseException
+ * @covers \DoclerLabs\ApiClientException\UnexpectedResponseException
  */
 class UnexpectedResponseExceptionTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     * @covers ::getResponse
-     */
     public function testException(): void
     {
         $statusCode = 414;
         $errors     = '{"it": "happens"}';
-        $response   = $this->createMock(ResponseInterface::class);
-        $response->method('getStatusCode')->willReturn($statusCode);
-        $sut        = new UnexpectedResponseException($errors, $response);
 
-        $this->assertInstanceOf(Throwable::class, $sut);
-        $this->assertEquals($statusCode, $sut->getResponse()->getStatusCode());
-        $this->assertEquals(
-            \sprintf('%s', $errors),
-            $sut->getMessage()
-        );
+        /** @var ResponseInterface|MockObject $response */
+        $response = $this->createMock(ResponseInterface::class);
+        $response
+            ->expects(self::once())
+            ->method('getStatusCode')
+            ->willReturn($statusCode);
+
+        $sut = new UnexpectedResponseException($errors, $response);
+
+        self::assertInstanceOf(Throwable::class, $sut);
+        self::assertEquals($statusCode, $sut->getResponse()->getStatusCode());
+        self::assertEquals(sprintf('%s', $errors), $sut->getMessage());
     }
 }

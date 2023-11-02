@@ -1,26 +1,29 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientBase\Test\Unit\Factory;
 
 use DoclerLabs\ApiClientException\BadRequestResponseException;
+use DoclerLabs\ApiClientException\ConflictResponseException;
 use DoclerLabs\ApiClientException\Factory\ResponseExceptionFactory;
 use DoclerLabs\ApiClientException\ForbiddenResponseException;
+use DoclerLabs\ApiClientException\GoneResponseException;
 use DoclerLabs\ApiClientException\NotFoundResponseException;
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
 use DoclerLabs\ApiClientException\UnauthorizedResponseException;
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * @coversDefaultClass \DoclerLabs\ApiClientException\Factory\ResponseExceptionFactory
+ * @covers \DoclerLabs\ApiClientException\Factory\ResponseExceptionFactory
  */
 class ResponseExceptionsFactoryTest extends TestCase
 {
     /**
      * @dataProvider exceptionsDataProvider
-     * @covers ::__construct
-     * @covers ::create
      */
     public function testCreate(int $statusCode, string $body, string $expectedExceptionClass): void
     {
@@ -28,8 +31,12 @@ class ResponseExceptionsFactoryTest extends TestCase
 
         $this->expectException($expectedExceptionClass);
 
+        /** @var ResponseInterface|MockObject $response */
         $response = $this->createMock(ResponseInterface::class);
-        $response->method('getStatusCode')->willReturn($statusCode);
+        $response
+            ->expects(self::atLeastOnce())
+            ->method('getStatusCode')
+            ->willReturn($statusCode);
 
         throw $sut->create($body, $response);
     }
@@ -45,6 +52,8 @@ class ResponseExceptionsFactoryTest extends TestCase
             [402, 'payment required', PaymentRequiredResponseException::class],
             [403, 'forbidden', ForbiddenResponseException::class],
             [404, 'not found', NotFoundResponseException::class],
+            [409, 'conflict', ConflictResponseException::class],
+            [410, 'gone', GoneResponseException::class],
             [456, 'others', UnexpectedResponseException::class],
         ];
     }

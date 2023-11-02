@@ -1,8 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoclerLabs\ApiClientException;
 
+use Fig\Http\Message\StatusCodeInterface;
+
 class ForbiddenResponseException extends UnexpectedResponseException
 {
-    public const STATUS_CODE = 403;
+    /** @deprecated */
+    public const STATUS_CODE = StatusCodeInterface::STATUS_FORBIDDEN;
 }
