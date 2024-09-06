@@ -11,6 +11,7 @@ use DoclerLabs\ApiClientException\ForbiddenResponseException;
 use DoclerLabs\ApiClientException\GoneResponseException;
 use DoclerLabs\ApiClientException\NotFoundResponseException;
 use DoclerLabs\ApiClientException\PaymentRequiredResponseException;
+use DoclerLabs\ApiClientException\TooManyRequestsResponseException;
 use DoclerLabs\ApiClientException\UnauthorizedResponseException;
 use DoclerLabs\ApiClientException\UnexpectedResponseException;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -54,6 +55,7 @@ class ResponseExceptionsFactoryTest extends TestCase
             [404, 'not found', NotFoundResponseException::class],
             [409, 'conflict', ConflictResponseException::class],
             [410, 'gone', GoneResponseException::class],
+            [429, 'too many requests', TooManyRequestsResponseException::class],
             [456, 'others', UnexpectedResponseException::class],
         ];
     }
