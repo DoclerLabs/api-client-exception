@@ -65,3 +65,23 @@ jobs:
 
         - name: Run tests
           run: php vendor/bin/phpunit
+
+    tests85:
+      runs-on: ubuntu-latest
+      name: Tests on PHP 8.5
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: 8.5
+            tools: composer:v2
+            coverage: pcov
+
+        - name: Install dependencies
+          run: composer install --no-interaction --prefer-dist
+
+        - name: Run tests
+          run: php vendor/bin/phpunit
