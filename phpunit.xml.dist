@@ -10,7 +10,7 @@
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
-        convertDeprecationsToExceptions="false"
+        convertDeprecationsToExceptions="true"
         stopOnFailure="false">
     <coverage processUncoveredFiles="true">
         <include>
