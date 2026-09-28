@@ -13,7 +13,7 @@ class UnexpectedResponseException extends Exception implements ClientExceptionIn
 {
     protected ResponseInterface $response;
 
-    public function __construct(string $message, ResponseInterface $response, Throwable $previous = null)
+    public function __construct(string $message, ResponseInterface $response, ?Throwable $previous = null)
     {
         parent::__construct($message, 0, $previous);
 
